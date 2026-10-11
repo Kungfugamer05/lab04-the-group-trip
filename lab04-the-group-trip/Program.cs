@@ -57,4 +57,35 @@ System.Console.WriteLine("Cost per person: " + costPerPerson.ToString("C"));
 System.Console.WriteLine();
 
 //Part 3
+System.Console.WriteLine("=== Part 3: Who Works How Long ===");
 
+double totalHoursWorked = 0;
+double totalTakeHomePay = 0;
+double longest = 0;
+
+for (int i = 0; i < names.Length; i++)
+{
+    double takeHomePay = TakeHomePay(hoursWorked[i], hourlyRates[i], taxRate);
+
+    double takeHomePayPerHour = takeHomePay / hoursWorked[i]; 
+
+    double hoursYouMustWork = HoursToCover(costPerPerson, takeHomePayPerHour);
+
+    System.Console.WriteLine(names[i] + ": takes home" +
+    takeHomePay.ToString("C") + " for " + 
+    hoursWorked[i].ToString("F0") + " hours, " +
+    takeHomePayPerHour.ToString("C") + " per hour, must work " + 
+    hoursYouMustWork.ToString("F2") + " hours");
+
+totalHoursWorked = totalHoursWorked +hoursWorked[i];
+totalTakeHomePay= totalTakeHomePay + takeHomePay; 
+longest = Math.Max(longest, hoursYouMustWork);
+
+}
+System.Console.WriteLine();
+
+System.Console.WriteLine("Total hours worked: " + totalHoursWorked.ToString("F0"));
+System.Console.WriteLine("Total take home pay: " + totalTakeHomePay.ToString("C"));
+System.Console.WriteLine("Longest anyone must work: " + longest.ToString("F2"));
+
+//Return the total amount spent on gas 
